@@ -14,12 +14,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const forms = () => {
   const form = document.querySelectorAll('form'),
-    inputs = document.querySelectorAll('input');
+    inputs = document.querySelectorAll('input'),
+    phoneInputs = document.querySelectorAll('input[name="user_phone"');
   const message = {
     loading: 'Загрузка',
     success: 'Спасибо, мы скоро с вами свяжемся!',
     failure: 'Что-то пошло не так...'
   };
+  phoneInputs.forEach(item => {
+    item.addEventListener('input', () => {
+      item.value = item.value.replace(/\D/gi, '');
+    });
+  });
   const postData = async (url, data) => {
     document.querySelector('.status').textContent = message.loading;
     let result = await fetch(url, {
@@ -45,7 +51,7 @@ const forms = () => {
         statusMessage.textContent = message.success;
       }).catch(() => {
         statusMessage.textContent = message.failure;
-      }).finnaly(() => {
+      }).finally(() => {
         clearInputs();
         setTimeout(() => {
           statusMessage.remove();
@@ -145,16 +151,51 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
   hideTabContent();
   showTabContent();
   header.addEventListener('click', e => {
-    const target = e.target;
-    if (target && target.classList.contains(tabSelector.replace(/\./, '')) || target.parentNode.classList.contains(tabSelector.replace(/\./, ''))) {
+    if (e.target && e.target.classList.contains(tabSelector.replace(/\./, '')) || e.target.parentNode.classList.contains(tabSelector.replace(/\./, ''))) {
       tabs.forEach((item, i) => {
-        if (target === item || target.parentNode === item) {
+        if (item === e.target || item === e.target.parentNode) {
           hideTabContent();
           showTabContent(i);
         }
       });
     }
   });
+
+  // const header = document.querySelector(headerSelector),
+  // 	tabs = document.querySelectorAll(tabSelector),
+  // 	content = document.querySelectorAll(contentSelector);
+
+  // function hideTabContent() {
+  // 	content.forEach(item => {
+  // 		item.style.display = 'none';
+  // 	});
+  // 	tabs.forEach(item => {
+  // 		item.classList.remove(activeClass);
+  // 	});
+  // }
+
+  // function showTabContent(i = 0) {
+  // 	content[i].style.display = 'block';
+  // 	tabs[i].classList.add(activeClass);
+  // }
+  // hideTabContent();
+  // showTabContent();
+
+  // header.addEventListener('click', (e) => {
+  // 	const target = e.target;
+
+  // 	if(target && 
+  //         target.classList.contains(tabSelector.replace(/\./, '')) ||
+  //         target.parentNode.classList.contains(tabSelector.replace(/\./, ''))) {
+  // 		tabs.forEach((item, i) => {
+  // 			if (target === item || target.parentNode === item) {
+  // 				hideTabContent();
+  // 				showTabContent(i);
+  // 			}
+  // 		});
+
+  // 	}
+  // });
 
   // const header = document.querySelector(headerSelector),
   // 	tabs = document.querySelectorAll(tabSelector),
