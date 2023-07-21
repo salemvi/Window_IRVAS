@@ -9,8 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	'use sctrict';
 
 	let modalState = {
-		form: 0,
-		type: 'tree'
+		
 	};
 	
 	modals();

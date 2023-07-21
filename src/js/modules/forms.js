@@ -36,11 +36,15 @@ const forms = (modalState) => {
 			item.appendChild(statusMessage);
 
 			const formData = new FormData(item);
-			if (item.getAttribute('data-calc') === 'end') {
+			if(item.getAttribute('data-calc') === 'end') {
 				for(let key in modalState) {
 					formData.append(key, modalState[key]);
-				}
+				} 
+				
+				
 			}
+		
+
 			postData('assets/server.php', formData)
 				.then(result => {
 					console.log(result);
@@ -49,9 +53,17 @@ const forms = (modalState) => {
 					statusMessage.textContent = message.failure;
 				}).finally(() => {
 					clearInputs();
+					for(let key in modalState) {
+						delete modalState[key];
+					}
+					
 					setTimeout( () => {
 						statusMessage.remove();
-					}, 5000);
+
+
+
+						
+					}, 3000);
 				});
 		});
 	});
