@@ -17,7 +17,18 @@ body {
   display: block;
   color: red;
 }
-
+.faded {
+  animation-name: faded;
+  animation-duration: 1.5s;
+}
+@keyframes faded {
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 1;
+  }
+}
 a:hover {
   text-decoration: none;
 }
@@ -828,6 +839,7 @@ textarea:focus {
 
 /*Modals*/
 .popup,
+.popupimg,
 .popup_engineer,
 .popup_calc_end {
   display: none;
@@ -839,6 +851,8 @@ textarea:focus {
   z-index: 9;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+
 
 .myimage {
   position: fixed;

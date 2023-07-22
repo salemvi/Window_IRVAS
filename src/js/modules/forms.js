@@ -3,7 +3,8 @@ import checkNumInputs from './checkNumInputs';
 const forms = (modalState) => {
 
 	const form = document.querySelectorAll('form'),
-		inputs = document.querySelectorAll('input');
+		inputs = document.querySelectorAll('input'),
+		windows = document.querySelectorAll('[data-modal]');
 
 	checkNumInputs('input[name="user_phone"]');
 
@@ -39,12 +40,9 @@ const forms = (modalState) => {
 			if(item.getAttribute('data-calc') === 'end') {
 				for(let key in modalState) {
 					formData.append(key, modalState[key]);
-				} 
-				
-				
+				} 	
 			}
 		
-
 			postData('assets/server.php', formData)
 				.then(result => {
 					console.log(result);
@@ -59,10 +57,10 @@ const forms = (modalState) => {
 					
 					setTimeout( () => {
 						statusMessage.remove();
-
-
-
-						
+						windows.forEach(item => {
+							item.style.display = 'none';
+						});
+						document.body.style.overflow = 'visible';
 					}, 3000);
 				});
 		});

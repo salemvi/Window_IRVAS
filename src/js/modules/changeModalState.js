@@ -11,13 +11,12 @@ const changeModalStatejsjs = (modalState) => {
 	checkNumInputs('#width');
 	checkNumInputs('#height');
 
-
 	function bindActionToElems(event, elem, prop) {
 		elem.forEach((item, i) => {
 			item.addEventListener(event, () => {
 				switch(item.nodeName) {
 				case 'SPAN': 
-					modalState[prop] = i;
+					modalState[prop] = i+1;
 					break;
 				case 'INPUT':
 					if(item.getAttribute('type') === 'checkbox') {
